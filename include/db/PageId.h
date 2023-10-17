@@ -1,7 +1,7 @@
 #ifndef DB_PAGEID_H
 #define DB_PAGEID_H
 
-#include <stdexcept>
+#include <functional>
 
 namespace db {
     /**

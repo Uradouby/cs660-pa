@@ -1,44 +1,30 @@
-#ifndef CS660_SEQSCAN_H
-#define CS660_SEQSCAN_H
+#ifndef DB_SEQSCAN_H
+#define DB_SEQSCAN_H
 
 #include <iostream>
 #include <string>
 #include <stdexcept>
 #include <vector>
-#include <db/Database.h>
-#include <db/TransactionId.h>
 #include <db/TupleDesc.h>
 #include <db/DbFile.h>
+#include <db/HeapFile.h>
 
 namespace db {
-    class SeqScanIterator {
-        // TODO pa1.6: add private members
-    public:
-        SeqScanIterator(/* TODO pa1.6: add parameters */);
-
-        bool operator!=(const SeqScanIterator &other) const;
-
-        SeqScanIterator &operator++();
-
-        const Tuple &operator*() const;
-    };
-
     /**
      * SeqScan is an implementation of a sequential scan access method that reads
      * each tuple of a table in no particular order (e.g., as they are laid out on
      * disk).
      */
     class SeqScan {
-        using iterator = SeqScanIterator;
-        // TODO pa1.6: add private members
+        using iterator = HeapFileIterator;
+        int tableid;
+        std::string alias;
+        std::string tableName;
     public:
 
         /**
-         * Creates a sequential scan over the specified table as a part of the
-         * specified transaction.
+         * Creates a sequential scan over the specified table.
          *
-         * @param tid
-         *            The transaction this scan is running as a part of.
          * @param tableid
          *            the table to scan.
          * @param tableAlias
@@ -49,7 +35,7 @@ namespace db {
          *            are, but the resulting name can be null.fieldName,
          *            tableAlias.null, or null.null).
          */
-        SeqScan(TransactionId *tid, int tableid, const std::string &tableAlias);
+        SeqScan(int tableid, const std::string &tableAlias);
 
         /**
          * @return
@@ -77,8 +63,7 @@ namespace db {
          */
         void reset(int tableid, const std::string &tableAlias);
 
-        SeqScan(TransactionId *tid, int tableid) :
-                SeqScan(tid, tableid, Database::getCatalog().getTableName(tableid)) {}
+        SeqScan(int tableid);
 
         /**
          * Returns the TupleDesc with field names from the underlying HeapFile,

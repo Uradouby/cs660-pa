@@ -2,7 +2,9 @@
 #include <fcntl.h>
 #include <cstdio>
 #include <cstdlib>
-#include "../include/db/HeapFile.h"
+#include <db/HeapFile.h>
+#include <iostream>
+#include "db/Utility.h"
 
 uint8_t page[4096] = {
         // Page header 64B

@@ -4,7 +4,6 @@
 #include <db/HeapPageId.h>
 #include <db/PageId.h>
 #include <functional>
-#include <stdexcept>
 
 namespace db {
     /**
@@ -12,7 +11,8 @@ namespace db {
      * specific table.
      */
     class RecordId {
-        // TODO pa1.4: add private members
+        const PageId *pid;
+        int tupleno;
     public:
         RecordId() = default;
         /**

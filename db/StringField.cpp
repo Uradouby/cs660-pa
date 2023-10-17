@@ -37,3 +37,7 @@ Field *StringField::parse(void *data) {
     memcpy(value, ptr + sizeof(int), len);
     return new StringField(value);
 }
+
+bool StringField::compare(Op op, const Field *value) const {
+    throw std::runtime_error("Not implemented");
+}

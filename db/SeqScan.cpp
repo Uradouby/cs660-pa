@@ -1,51 +1,46 @@
 #include <db/SeqScan.h>
+#include <db/Database.h>
+#include <db/Catalog.h>
+#include <db/BufferPool.h>
 
 using namespace db;
 
-// TODO pa1.6: implement
-SeqScan::SeqScan(TransactionId *tid, int tableid, const std::string &tableAlias) {
+SeqScan::SeqScan(int tableid, const std::string &tableAlias) {
+    reset(tableid, tableAlias);
 }
 
 std::string SeqScan::getTableName() const {
-    // TODO pa1.6: implement
+    return tableName;
 }
 
 std::string SeqScan::getAlias() const {
-    // TODO pa1.6: implement
+    return alias;
 }
 
 void SeqScan::reset(int tabid, const std::string &tableAlias) {
-    // TODO pa1.6: implement
+    tableid = tabid;
+    alias = tableAlias;
+    tableName = Database::getCatalog().getTableName(tableid);
 }
 
 const TupleDesc &SeqScan::getTupleDesc() const {
-    // TODO pa1.6: implement
+    return Database::getCatalog().getTupleDesc(tableid);
 }
 
 SeqScan::iterator SeqScan::begin() const {
-    // TODO pa1.6: implement
+    DbFile *file = Database::getCatalog().getDatabaseFile(tableid);
+    if (auto heapFile = dynamic_cast<HeapFile *>(file)) {
+        return heapFile->begin();
+    }
+    throw std::runtime_error("can't iterate");
 }
 
 SeqScan::iterator SeqScan::end() const {
-    // TODO pa1.6: implement
+    DbFile *file = Database::getCatalog().getDatabaseFile(tableid);
+    if (auto heapFile = dynamic_cast<HeapFile *>(file)) {
+        return heapFile->end();
+    }
+    throw std::runtime_error("can't iterate");
 }
 
-//
-// SeqScanIterator
-//
-
-// TODO pa1.6: implement
-SeqScanIterator::SeqScanIterator(/* TODO pa1.6: add parameters */) {
-}
-
-bool SeqScanIterator::operator!=(const SeqScanIterator &other) const {
-    // TODO pa1.6: implement
-}
-
-SeqScanIterator &SeqScanIterator::operator++() {
-    // TODO pa1.6: implement
-}
-
-const Tuple &SeqScanIterator::operator*() const {
-    // TODO pa1.6: implement
-}
+SeqScan::SeqScan(int tableid) : SeqScan(tableid, Database::getCatalog().getTableName(tableid)) {}

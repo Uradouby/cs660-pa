@@ -3,8 +3,6 @@
 
 #include <db/Type.h>
 #include <string>
-#include <stdexcept>
-#include <utility>
 #include <vector>
 
 namespace db {
@@ -36,10 +34,11 @@ namespace db {
      * TupleDesc describes the schema of a tuple.
      */
     class TupleDesc {
-        // TODO pa1.1: add private members
-        using iterator = void*; // replace void* with a container iterator or a custom iterator implementation
+        using iterator = std::vector<TDItem>::const_iterator;
+        std::vector<TDItem> items;
+        size_t size;
     public:
-        TupleDesc() {}
+        TupleDesc() : size(0) {}
 
         /**
          * Create a new TupleDesc with types.length fields with fields of the

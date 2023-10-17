@@ -1,15 +1,29 @@
 add_library(db
+        BTreeEntry.cpp
+        BTreeFile.cpp
+        BTreeFile_internal.cpp
+        BTreeHeaderPage.cpp
+        BTreeInternalPage.cpp
+        BTreeLeafPage.cpp
+        BTreePage.cpp
+        BTreePageId.cpp
+        BTreeRootPtrPage.cpp
+        BufferPool_internal.cpp
         BufferPool.cpp
         Catalog.cpp
         Database.cpp
+        Field.cpp
         HeapFile.cpp
         HeapPage.cpp
         HeapPageId.cpp
+        IndexPredicate.cpp
         IntField.cpp
+        Predicate.cpp
         RecordId.cpp
         SeqScan.cpp
         SkeletonFile.cpp
         StringField.cpp
+        TransactionId.cpp
         Tuple.cpp
         TupleDesc.cpp
         Type.cpp

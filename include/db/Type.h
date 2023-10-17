@@ -5,9 +5,9 @@
 #include <cstdint>
 #include <string>
 
-
 namespace db {
     class Field;
+
     namespace Types {
         constexpr std::size_t STRING_LEN = 128;
 

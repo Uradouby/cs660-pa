@@ -2,15 +2,14 @@
 #define DB_HEAPPAGEID_H
 
 #include <db/PageId.h>
-#include <functional>
-#include <stdexcept>
 
 namespace db {
     /**
      * Unique identifier for HeapPage objects.
      */
     class HeapPageId : public PageId {
-        // TODO pa1.4: Add private members
+        int tableId;
+        int pgNo;
     public:
         /**
          * Constructor. Create a page id structure for a specific page of a

@@ -4,17 +4,6 @@
 #include <db/HeapPageId.h>
 #include <db/Tuple.h>
 #include <db/Page.h>
-#include <db/Catalog.h>
-#include <db/BufferPool.h>
-#include <db/Database.h>
-
-#include <iostream>
-#include <iterator>
-#include <vector>
-#include <fstream>
-#include <mutex>
-#include <optional>
-#include <cstring>
 
 namespace db {
     class HeapPageIterator;
@@ -62,18 +51,18 @@ namespace db {
         /** Retrieve the number of tuples on this page.
             @return the number of tuples on this page
         */
-        int getNumTuples();
+        int getNumTuples() const;
 
         /**
          * Computes the number of bytes in the header of a page in a HeapFile with each tuple occupying tupleSize bytes
          * @return the number of bytes in the header of a page in a HeapFile with each tuple occupying tupleSize bytes
          */
-        int getHeaderSize();
+        int getHeaderSize() const;
 
         /**
          * @return the PageId associated with this page.
          */
-        PageId &getId() override;
+        const PageId &getId() const override;
 
         /**
          * Generates a byte array representing the contents of this page.
@@ -86,7 +75,7 @@ namespace db {
          * @see #HeapPage
          * @return A byte array correspond to the bytes of this page.
          */
-        void *getPageData() override;
+        void *getPageData() const override;
 
         /**
          * Static method to generate a byte array corresponding to an empty
@@ -97,7 +86,7 @@ namespace db {
          *
          * @return The returned ByteArray.
          */
-        static uint8_t *createEmptyPageData();
+        static void *createEmptyPageData();
 
         /**
          * Returns the number of empty slots on this page.

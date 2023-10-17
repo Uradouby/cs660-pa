@@ -50,13 +50,14 @@ If you collaborate with someone else, you have to describe how you split the wor
 
 ### Collaboration
 
-This assignment should be manageable for a single person, but if you prefer to work with a partner, this is also OK (
-which is the default setup in our class). Larger groups than 2 are not allowed. Please indicate clearly who you worked
+This assignment should be manageable for a single person, but if you prefer to work with a partner, this is also OK
+(which is the default setup in our class). Larger groups than 2 are not allowed. Please indicate clearly who you worked
 with, if anyone, on your individual writeup.
 
 ### Submitting your assignment
 
-Submit only the files that are provided with this assignment (only the [db](/db) and [include](/include) directories).
+Submit only the files that are provided with this assignment (only the [db](../db) and [include](../include)
+directories).
 
 ### Submitting a bug
 

@@ -29,6 +29,15 @@ namespace db {
         std::string to_string() const override {
             return std::to_string(value);
         }
+
+        /**
+         * Compare the specified field to the value of this Field.
+         * Return semantics are as specified by Field.compare
+         *
+         * @throws IllegalCastException if val is not an IntField
+         * @see Field#compare
+         */
+        bool compare(Op op, const Field *value) const override;
     };
 }
 

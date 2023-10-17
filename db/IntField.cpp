@@ -30,3 +30,24 @@ Field *IntField::parse(void *data) {
     memcpy(&value, data, sizeof(int));
     return new IntField(value);
 }
+
+bool IntField::compare(Op op, const Field *val) const {
+    const IntField *iVal = dynamic_cast<const IntField *>(val);
+    switch (op) {
+        case Op::EQUALS:
+            return value == iVal->value;
+        case Op::NOT_EQUALS:
+            return value != iVal->value;
+        case Op::GREATER_THAN:
+            return value > iVal->value;
+        case Op::GREATER_THAN_OR_EQ:
+            return value >= iVal->value;
+        case Op::LESS_THAN:
+            return value < iVal->value;
+        case Op::LESS_THAN_OR_EQ:
+            return value <= iVal->value;
+        case Op::LIKE:
+            return value == iVal->value;
+    }
+    return false;
+}

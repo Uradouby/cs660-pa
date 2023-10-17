@@ -1,4 +1,5 @@
 #include <db/HeapPage.h>
+#include <db/Database.h>
 
 using namespace db;
 
@@ -36,24 +37,25 @@ HeapPage::HeapPage(const HeapPageId &id, uint8_t *data) : pid(id) {
     size_t offset = header_size;
 
     tuples = new Tuple[numSlots];
+    size_t tuple_size = td.getSize();
     for (int slot = 0; slot < numSlots; slot++) {
         if (isSlotUsed(slot)) {
             readTuple(tuples + slot, data + offset, slot);
         }
-        offset += td.getSize();
+        offset += tuple_size;
     }
 }
 
-int HeapPage::getNumTuples() {
-    // TODO pa1.4: implement
+int HeapPage::getNumTuples() const {
+    return Database::getBufferPool().getPageSize() * 8 / (td.getSize() * 8 + 1);
 }
 
-int HeapPage::getHeaderSize() {
-    // TODO pa1.4: implement
+int HeapPage::getHeaderSize() const {
+    return Database::getBufferPool().getPageSize() - td.getSize() * numSlots;
 }
 
-PageId &HeapPage::getId() {
-    // TODO pa1.4: implement
+const PageId &HeapPage::getId() const {
+    return pid;
 }
 
 void HeapPage::readTuple(Tuple *t, uint8_t *data, int slotId) {
@@ -68,8 +70,8 @@ void HeapPage::readTuple(Tuple *t, uint8_t *data, int slotId) {
     }
 }
 
-void *HeapPage::getPageData() {
-    auto *data = createEmptyPageData();
+void *HeapPage::getPageData() const {
+    auto *data = (uint8_t *) createEmptyPageData();
     size_t header_size = getHeaderSize();
 
     // Create the header of the page
@@ -95,23 +97,28 @@ void *HeapPage::getPageData() {
     return data;
 }
 
-uint8_t *HeapPage::createEmptyPageData() {
+void *HeapPage::createEmptyPageData() {
     int len = Database::getBufferPool().getPageSize();
     return new uint8_t[len]{}; // all 0
 }
 
 int HeapPage::getNumEmptySlots() const {
-    // TODO pa1.4: implement
+    int cnt = 0;
+    for (int i = 0; i < numSlots; i++)
+        if (!isSlotUsed(i)) cnt++;
+    return cnt;
 }
 
 bool HeapPage::isSlotUsed(int i) const {
-    // TODO pa1.4: implement
+    int headerbyte = i >> 3;
+    int headerbit = i & 0b111;
+    return (header[headerbyte] >> headerbit & 1) != 0;
 }
 
 HeapPageIterator HeapPage::begin() const {
-    // TODO pa1.4: implement
+    return HeapPageIterator(0, this);
 }
 
 HeapPageIterator HeapPage::end() const {
-    // TODO pa1.4: implement
+    return HeapPageIterator(numSlots, this);
 }

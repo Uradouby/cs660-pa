@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <db/Database.h>
 #include <db/HeapPage.h>
 #include <db/HeapPageId.h>
 #include <db/Utility.h>

@@ -7,7 +7,7 @@
 The `Database` class provides access to a collection of static objects that are the global state of the database. In
 particular, this includes methods to access the catalog (the list of all the tables in the database) and the buffer
 pool (the collection of database file pages currently in memory). We have implemented the Database class for you. You
-should take a look at this [file](/include/db/Database.h) as you will need to access these objects.
+should take a look at this [file](../include/db/Database.h) as you will need to access these objects.
 
 ### Fields and Tuples
 
@@ -113,34 +113,34 @@ files:
 
 ### Exercise 1
 
-- TupleDesc ([header](/include/db/TupleDesc.h) & [implementation](/db/TupleDesc.cpp))
-- Tuple ([header](/include/db/Tuple.h) & [implementation](/db/Tuple.cpp))
+- TupleDesc ([header](../include/db/TupleDesc.h) & [implementation](../db/TupleDesc.cpp))
+- Tuple ([header](../include/db/Tuple.h) & [implementation](../db/Tuple.cpp))
 
 ### Exercise 2
 
 Add any private members needed and implement the methods in:
 
-- Catalog ([header](/include/db/Catalog.h) & [implementation](/db/Catalog.cpp))
+- Catalog ([header](../include/db/Catalog.h) & [implementation](../db/Catalog.cpp))
 
 ### Exercise 3
 
 Add any private members needed and implement the methods in:
 
-- BufferPool ([header](/include/db/BufferPool.h) & [implementation](/db/BufferPool.cpp))
+- BufferPool ([header](../include/db/BufferPool.h) & [implementation](../db/BufferPool.cpp))
 
 ### Exercise 4
 
-- HeapPageId ([header](/include/db/HeapPageId.h) & [implementation](/db/HeapPageId.cpp))
-- RecordID ([header](/include/db/RecordID.h) & [implementation](/db/RecordID.cpp))
-- HeapPage ([header](/include/db/HeapPage.h) & [implementation](/db/HeapPage.cpp))
+- HeapPageId ([header](../include/db/HeapPageId.h) & [implementation](../db/HeapPageId.cpp))
+- RecordID ([header](../include/db/RecordID.h) & [implementation](../db/RecordID.cpp))
+- HeapPage ([header](../include/db/HeapPage.h) & [implementation](../db/HeapPage.cpp))
 
 ### Exercise 5
 
-- HeapFile ([header](/include/db/HeapFile.h) & [implementation](/db/HeapFile.cpp))
+- HeapFile ([header](../include/db/HeapFile.h) & [implementation](../db/HeapFile.cpp))
 
 ### Exercise 6
 
-- SeqScan ([header](/include/db/SeqScan.h) & [implementation](/db/SeqScan.cpp))
+- SeqScan ([header](../include/db/SeqScan.h) & [implementation](../db/SeqScan.cpp))
 
 This operator sequentially scans all of the tuples from the pages of the table specified by the `tableid` in the
 constructor. This operator should access tuples through the `DbFile`.

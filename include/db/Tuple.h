@@ -12,8 +12,10 @@ namespace db {
      * and contain Field objects with the data for each field.
      */
     class Tuple {
-        // TODO pa1.1: add private members
-        using iterator = void*; // replace void* with a container iterator or a custom iterator implementation
+        using iterator = std::vector<const Field*>::const_iterator;
+        const RecordId *rid;
+        std::vector<const Field*> fields;
+        TupleDesc td;
     public:
         Tuple() = default;
 
@@ -59,10 +61,6 @@ namespace db {
 
         iterator end() const;
 
-        /**
-         * For debugging purposes. Not necessary for the assignment.
-         * @return a string representation of this tuple.
-         */
         std::string to_string() const;
     };
 

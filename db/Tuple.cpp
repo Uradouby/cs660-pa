@@ -6,38 +6,48 @@ using namespace db;
 // Tuple
 //
 
-// TODO pa1.1: implement
-Tuple::Tuple(const TupleDesc &td, RecordId *rid) {
+Tuple::Tuple(const TupleDesc &td, RecordId *rid) : td(td), rid(rid) {
+    fields.resize(td.numFields());
 }
 
 const TupleDesc &Tuple::getTupleDesc() const {
-    // TODO pa1.1: implement
+    return td;
 }
 
 const RecordId *Tuple::getRecordId() const {
-    // TODO pa1.1: implement
+    return rid;
 }
 
 void Tuple::setRecordId(const RecordId *id) {
-    // TODO pa1.1: implement
+    rid = id;
 }
 
 const Field &Tuple::getField(int i) const {
-    // TODO pa1.1: implement
+    return *fields[i];
 }
 
 void Tuple::setField(int i, const Field *f) {
-    // TODO pa1.1: implement
+    fields[i] = f;
 }
 
 Tuple::iterator Tuple::begin() const {
-    // TODO pa1.1: implement
+    return fields.begin();
 }
 
 Tuple::iterator Tuple::end() const {
-    // TODO pa1.1: implement
+    return fields.end();
 }
 
 std::string Tuple::to_string() const {
-    // TODO pa1.1: implement
+    std::string s;
+    auto it = fields.begin();
+    if (it != fields.end()) {
+        s += (*it)->to_string();
+        ++it;
+    }
+    while (it != fields.end()) {
+        s += ", " + (*it)->to_string();
+        ++it;
+    }
+    return s;
 }

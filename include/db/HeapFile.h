@@ -1,18 +1,26 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <stdexcept>
+#ifndef DB_HEAPFILE_H
+#define DB_HEAPFILE_H
+
 #include <db/TupleDesc.h>
+#include <db/Tuple.h>
 #include <db/Page.h>
 #include <db/PageId.h>
-#include <db/TransactionId.h>
+#include <db/DbFile.h>
 #include <db/HeapPage.h>
+#include <db/HeapPageId.h>
 
 namespace db {
     class HeapFileIterator {
-        // TODO pa1.5: add private members
+        int numPages;
+        HeapPageId hpid;
+        bool end;
+        HeapPageIterator *it;
+        HeapPage *page;
+
     public:
-        HeapFileIterator(/* TODO pa1.5: add parameters */);
+
+        HeapFileIterator(int tableid, int numPages, bool end = false);
+
         bool operator!=(const HeapFileIterator &other) const;
 
         Tuple &operator*() const;
@@ -31,7 +39,10 @@ namespace db {
      * @author Sam Madden
      */
     class HeapFile : public DbFile {
-        // TODO pa1.5: add private members
+        int fd;
+        int tableid;
+        const TupleDesc &td;
+        int numPages;
     public:
 
         /**
@@ -59,13 +70,21 @@ namespace db {
 
         Page *readPage(const PageId &pid) override;
 
+        std::vector<Page *> insertTuple(TransactionId tid, Tuple &t) override;
+
+        std::vector<Page *> deleteTuple(TransactionId tid, Tuple &t) override;
+
         /**
          * Returns the number of pages in this HeapFile.
          */
-        int getNumPages();
+        int getNumPages() const;
 
         HeapFileIterator begin() const;
 
         HeapFileIterator end() const;
+
+        void writePage(Page *p) override;
     };
 }
+
+#endif

@@ -30,6 +30,8 @@ namespace db {
         std::string to_string() const override {
             return value;
         }
+
+        bool compare(Op op, const Field *value) const override;
     };
 }
 

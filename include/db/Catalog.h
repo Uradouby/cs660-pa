@@ -3,16 +3,16 @@
 
 #include <db/TupleDesc.h>
 #include <db/DbFile.h>
-#include <db/Utility.h>
+#include <string>
+#include <unordered_map>
 
 namespace db {
-
     struct Table {
         DbFile *file;
         std::string name;
         std::string pkeyField;
 
-        Table(DbFile *file, const std::string &name, const std::string &pkeyField) : file(file), name(name), pkeyField(pkeyField) {}
+        Table(DbFile *file, const std::string &name, const std::string &pkeyField);
     };
 
     /**
@@ -23,7 +23,9 @@ namespace db {
      * to a catalog that reads a catalog table from disk.
      */
     class Catalog {
-        // TODO pa1.2: add private members
+        using iterator = std::unordered_map<int, Table>::iterator;
+        std::unordered_map<int, Table*> idToTable;
+        std::unordered_map<std::string, Table*> nameToTable;
     public:
         // disable copy
         Catalog(const Catalog &) = delete;
@@ -54,7 +56,7 @@ namespace db {
          * @param file the contents of the table to add;  file.getId() is the identfier of
          *    this file/tupledesc param for the calls getTupleDesc and getFile
          */
-        void addTable(DbFile *file) { addTable(file, Utility::generateUUID(), ""); }
+        void addTable(DbFile *file);
 
         /**
          * Return the id of the table with a specified name,
