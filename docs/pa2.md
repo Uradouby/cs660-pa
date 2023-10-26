@@ -9,7 +9,7 @@ The remainder of this document gives some suggestions about how to start coding,
 you work through the assignment, and discusses how to hand in your code. This assignment requires you to write a fair
 amount of code, so we encourage you to start early!
 
-## Page eviction for SimpleDB Buffer
+## Page eviction for BufferPool
 
 In assignment 2, you will choose a page eviction policy and instrument any previous code that reads or creates pages to
 implement your policy.

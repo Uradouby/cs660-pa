@@ -2,25 +2,20 @@
 
 using namespace db;
 
-// TODO pa2.2: implement
-Predicate::Predicate(int field, Op op, const Field *operand) {}
+Predicate::Predicate(int field, Op op, const Field *operand) : field(field), op(op), operrand(operand) {}
 
 int Predicate::getField() const {
-    // TODO pa2.2: implement
-    return {};
+    return field;
 }
 
 Op Predicate::getOp() const {
-    // TODO pa2.2: implement
-    return {};
+    return op;
 }
 
 const Field *Predicate::getOperand() const {
-    // TODO pa2.2: implement
-    return {};
+    return operrand;
 }
 
 bool Predicate::filter(const Tuple &t) const {
-    // TODO pa2.2: implement
-    return {};
+    return t.getField(field).compare(op, operrand);
 }

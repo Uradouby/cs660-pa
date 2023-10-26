@@ -11,7 +11,9 @@ namespace db {
      * Predicate compares tuples to a specified Field value.
      */
     class Predicate {
-        // TODO pa2.2: add private members
+        int field;
+        Op op;
+        const Field *operrand;
 
         /** Constants used for return codes in Field.compare */
     public:

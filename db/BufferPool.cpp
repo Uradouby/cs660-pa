@@ -4,29 +4,65 @@
 using namespace db;
 
 void BufferPool::evictPage() {
-    // TODO pa2.1: implement
+    auto it = pages.begin();
+    if (it != pages.end()) {
+        flushPage(it->first);
+        pages.erase(it);
+    }
 }
 
 void BufferPool::flushAllPages() {
-    // TODO pa2.1: implement
+    for (const auto &item: pages) {
+        flushPage(item.first);
+    }
 }
 
 void BufferPool::discardPage(const PageId *pid) {
-    // TODO pa2.1: implement
+    auto it = pages.find(pid);
+    if (it != pages.end()) {
+        pages.erase(it);
+    }
 }
 
 void BufferPool::flushPage(const PageId *pid) {
-    // TODO pa2.1: implement
+    auto it = pages.find(pid);
+    if (it != pages.end() && it->second->isDirty().has_value()) {
+        it->second->markDirty(std::nullopt);
+        Database::getCatalog().getDatabaseFile(pid->getTableId())->writePage(it->second);
+    }
 }
 
 void BufferPool::flushPages(const TransactionId &tid) {
-    // TODO pa2.1: implement
+    for (const auto &item: pages) {
+        if (item.second->isDirty() == tid) {
+            flushPage(item.first);
+        }
+    }
 }
 
 void BufferPool::insertTuple(const TransactionId &tid, int tableId, Tuple *t) {
-    // TODO pa2.3: implement
+    auto f = Database::getCatalog().getDatabaseFile(tableId);
+    auto dirtypages = f->insertTuple(tid, *t);
+    for (auto page: dirtypages) {
+        page->markDirty(tid);
+        const PageId *pid = &page->getId();
+        if (pages.size() >= numPages && pages.find(pid) == pages.end()) {
+            evictPage();
+        }
+        pages[pid] = page;
+    }
 }
 
 void BufferPool::deleteTuple(const TransactionId &tid, Tuple *t) {
-    // TODO pa2.3: implement
+    int tableId = t->getRecordId()->getPageId()->getTableId();
+    auto f = Database::getCatalog().getDatabaseFile(tableId);
+    auto dirtypages = f->insertTuple(tid, *t);
+    for (auto page: dirtypages) {
+        page->markDirty(tid);
+        const PageId *pid = &page->getId();
+        if (pages.size() >= numPages && pages.find(pid) == pages.end()) {
+            evictPage();
+        }
+        pages[pid] = page;
+    }
 }

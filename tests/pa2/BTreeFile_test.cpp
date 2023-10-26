@@ -26,7 +26,6 @@ TEST(BTreeFileTest, splitLeafPagesTest) {
 
 TEST(BTreeFileTest, findLeafPagesTest) {
     db::Database::reset();
-    db::BufferPool &bufferpool = db::Database::getBufferPool();
     db::Catalog &catalog = db::Database::getCatalog();
     db::TupleDesc td = db::Utility::getTupleDesc(2);
     db::BTreeFile file("btree1.dat", 0, td);
