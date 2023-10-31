@@ -12,6 +12,10 @@ BTreeInternalPageIterator::BTreeInternalPageIterator(int slot, BTreeInternalPage
     if (slot == p->numSlots) {
         return;
     }
+    
+    if(slot > 0)
+        prevChildId = p->getChildId(curEntry - 1);
+
     currChildId = p->getChildId(curEntry);
 
     if(currChildId == nullptr) {

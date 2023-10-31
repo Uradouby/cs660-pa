@@ -1,4 +1,9 @@
 #include <db/BTreeFile.h>
+#include <db/Database.h>
+#include <cassert>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 using namespace db;
 
@@ -44,4 +49,12 @@ void BTreeFile::mergeLeafPages(TransactionId tid, PagesMap &dirtypages, BTreeLea
 void BTreeFile::mergeInternalPages(TransactionId tid, PagesMap &dirtypages, BTreeInternalPage *leftPage,
                                    BTreeInternalPage *rightPage, BTreeInternalPage *parent, BTreeEntry *parentEntry) {
     // TODO pa2.4: implement (BONUS)
+}
+
+BTreeFile::BTreeFile(const char *fname, int key, const TupleDesc &td) : keyField(key), td(td) {
+    fd = open(fname, O_RDWR | O_CREAT | O_APPEND | O_TRUNC, 0644);
+    if (fd == -1) {
+        throw std::runtime_error("open");
+    }
+    tableid = std::hash<std::string>{}(fname);
 }
