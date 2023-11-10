@@ -37,11 +37,11 @@ namespace db {
          */
         bool filter(Tuple *t1, Tuple *t2);
 
-        int getField1();
+        int getField1() const;
 
-        int getField2();
+        int getField2() const;
 
-        Predicate::Op getOperator();
+        Predicate::Op getOperator() const;
     };
 }
 

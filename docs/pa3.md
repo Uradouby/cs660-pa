@@ -34,29 +34,7 @@ was `Aggregator::NO_GROUPING`, in which case the result is a single tuple of the
 Note that this implementation requires space linear in the number of distinct groups. For the purposes of this
 assignment, you do not need to worry about the situation where the number of groups exceeds available memory.
 
-## HeapFile Mutability
-
-Now, we will begin to implement methods to support modifying tables. We begin at the level of individual pages and
-files. There are two main sets of operations: adding tuples and removing tuples.
-
-- Removing tuples: To remove a tuple, you will need to implement `deleteTuple`. Tuples contain RecordIDs which allow you
-  to find the page they reside on, so this should be as simple as locating the page a tuple belongs to and modifying the
-  headers of the page appropriately.
-
-- Adding tuples: The `insertTuple` method in `HeapFile` is responsible for adding a tuple to a heap file. To add a new
-  tuple to a `HeapFile`, you will have to find a page with an empty slot. If no such pages exist in the `HeapFile`, you
-  need to create a new page and append it to the physical file on disk. You will need to ensure that the `RecordID`
-  in
-  the tuple is updated correctly.
-
-To implement `HeapPage`, you will need to modify the header bitmap in methods such as `insertTuple` and `deleteTuple`.
-You may find that the `getNumEmptySlots` and `isSlotUsed` methods we asked you to implement in PA 1 serve as useful
-abstractions. Note that there is a `markSlotUsed` method provided as an abstraction to modify the filled or cleared
-status of a tuple in the page header.
-
 ## Insertion and deletion
-
-Now that you have can add and remove tuples in `HeapFile`s, you will implement the `Insert` and `Delete` operators.
 
 For plans that implement insert and delete queries, the top-most operator is a special `Insert` or `Delete` operator
 that modifies the pages on disk. These operators return the number of affected tuples. This is implemented by returning
@@ -82,14 +60,8 @@ Implement the methods as indicated by the `// TODO pa3.x` comments in the follow
 
 - Aggregate ([header](../include/db/Aggregate.h) & [implementation](../db/Aggregate.cpp))
 - IntegerAggregator ([header](../include/db/IntegerAggregator.h) & [implementation](../db/IntegerAggregator.cpp))
-- StringAggregator ([header](../include/db/StringAggregator.h) & [implementation](../db/StringAggregator.cpp))
 
-### Exercise 3: HeapFile Mutability
-
-- HeapFile ([header](../include/db/HeapFile.h) & [implementation](../db/HeapFile.cpp))
-- HeapPage ([header](../include/db/HeapPage.h) & [implementation](../db/HeapPage.cpp))
-
-### Exercise 4: Insertion and deletion
+### Exercise 3: Insertion and deletion
 
 - Insert ([header](../include/db/Insert.h) & [implementation](../db/Insert.cpp))
 - Delete ([header](../include/db/Delete.h) & [implementation](../db/Delete.cpp))

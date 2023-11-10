@@ -1,4 +1,5 @@
 #include <db/JoinPredicate.h>
+#include <db/Tuple.h>
 
 using namespace db;
 
@@ -10,14 +11,14 @@ bool JoinPredicate::filter(Tuple *t1, Tuple *t2) {
     // TODO pa3.1: some code goes here
 }
 
-int JoinPredicate::getField1() {
+int JoinPredicate::getField1() const {
     // TODO pa3.1: some code goes here
 }
 
-int JoinPredicate::getField2() {
+int JoinPredicate::getField2() const {
     // TODO pa3.1: some code goes here
 }
 
-Predicate::Op JoinPredicate::getOperator() {
+Predicate::Op JoinPredicate::getOperator() const {
     // TODO pa3.1: some code goes here
 }

@@ -44,7 +44,7 @@ namespace db {
          * @param child2
          *            Iterator for the right(inner) relation to join
          */
-        Join(JoinPredicate p, DbIterator *child1, DbIterator *child2);
+        Join(JoinPredicate *p, DbIterator *child1, DbIterator *child2);
 
         JoinPredicate *getJoinPredicate();
 

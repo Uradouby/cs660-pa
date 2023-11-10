@@ -12,9 +12,8 @@ namespace db {
  * Knows how to compute some aggregate over a set of StringFields.
  */
     class StringAggregator : public Aggregator {
-        // TODO pa3.2: add private members
+        // EXTRA pa3.2: add private members
     public:
-
         /**
          * Aggregate constructor
          * @param gbfield the 0-based index of the group-by field in the tuple, or NO_GROUPING if there is no grouping

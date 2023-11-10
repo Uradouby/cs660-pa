@@ -10,7 +10,7 @@ namespace db {
  * constructor
  */
     class Insert : public Operator {
-        // TODO pa3.4: add private members
+        // TODO pa3.3: add private members
     protected:
         /**
          * Inserts tuples read from child into the tableId specified by the

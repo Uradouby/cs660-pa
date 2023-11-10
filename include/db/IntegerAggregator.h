@@ -12,7 +12,6 @@ namespace db {
     class IntegerAggregator : public Aggregator {
         // TODO pa3.2: add private members
     public:
-
         /**
          * Aggregate constructor
          *

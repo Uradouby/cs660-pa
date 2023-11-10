@@ -13,7 +13,7 @@ namespace db {
      * them from the table they belong to.
      */
     class Delete : public Operator {
-        // TODO pa3.4: add private members
+        // TODO pa3.3: add private members
     protected:
         /**
          * Deletes tuples as they are read from the child operator. Deletes are

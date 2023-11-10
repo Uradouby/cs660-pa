@@ -2,7 +2,7 @@
 
 using namespace db;
 
-Join::Join(JoinPredicate p, DbIterator *child1, DbIterator *child2) {
+Join::Join(JoinPredicate *p, DbIterator *child1, DbIterator *child2) {
     // TODO pa3.1: some code goes here
 }
 
