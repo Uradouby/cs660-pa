@@ -2,13 +2,13 @@
 
 using namespace db;
 
-IndexPredicate::IndexPredicate(Op op, const Field *fvalue) : op(op), fvalue(fvalue) {}
+IndexPredicate::IndexPredicate(Predicate::Op op, const Field *fvalue) : op(op), fvalue(fvalue) {}
 
 const Field *IndexPredicate::getField() const {
     return fvalue;
 }
 
-Op IndexPredicate::getOp() const {
+Predicate::Op IndexPredicate::getOp() const {
     return op;
 }
 

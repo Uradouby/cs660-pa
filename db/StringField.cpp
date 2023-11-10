@@ -38,6 +38,6 @@ Field *StringField::parse(void *data) {
     return new StringField(value);
 }
 
-bool StringField::compare(Op op, const Field *value) const {
+bool StringField::compare(Predicate::Op op, const Field *value) const {
     throw std::runtime_error("Not implemented");
 }

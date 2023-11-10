@@ -131,7 +131,7 @@ namespace db {
          * "fieldType[0](fieldName[0]), ..., fieldType[M](fieldName[M])", although
          * the exact format does not matter.
          *
-         * @return String describing this descriptor.
+         * @return std::string describing this descriptor.
          */
         std::string to_string() const;
 

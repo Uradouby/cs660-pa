@@ -2,21 +2,21 @@
 
 using namespace db;
 
-std::string db::to_string(Op op) {
+std::string db::to_string(Predicate::Op op) {
     switch (op) {
-        case Op::EQUALS:
+        case Predicate::Op::EQUALS:
             return "=";
-        case Op::NOT_EQUALS:
+        case Predicate::Op::NOT_EQUALS:
             return "<>";
-        case Op::GREATER_THAN:
+        case Predicate::Op::GREATER_THAN:
             return ">";
-        case Op::LESS_THAN:
+        case Predicate::Op::LESS_THAN:
             return "<";
-        case Op::LESS_THAN_OR_EQ:
+        case Predicate::Op::LESS_THAN_OR_EQ:
             return "<=";
-        case Op::GREATER_THAN_OR_EQ:
+        case Predicate::Op::GREATER_THAN_OR_EQ:
             return ">=";
-        case Op::LIKE:
+        case Predicate::Op::LIKE:
             return "LIKE";
         default:
             return "UNKNOWN";

@@ -7,6 +7,7 @@
 
 namespace db {
     class HeapPageIterator;
+
     /**
      * Each instance of HeapPage stores data for one page of HeapFiles and
      * implements the Page interface that is used by BufferPool.
@@ -17,6 +18,7 @@ namespace db {
      */
     class HeapPage : public Page {
         friend class HeapPageIterator;
+
         HeapPageId pid;
         TupleDesc td;
         uint8_t *header;
@@ -27,6 +29,11 @@ namespace db {
          * Suck up tuples from the source file.
          */
         void readTuple(Tuple *t, uint8_t *data, int slotId);
+
+        /**
+         * Abstraction to fill or clear a slot on this page.
+         */
+        void markSlotUsed(int i, bool value);
 
     public:
         /**
@@ -102,6 +109,25 @@ namespace db {
         HeapPageIterator begin() const;
 
         HeapPageIterator end() const;
+
+        /**
+          * Delete the specified tuple from the page;  the tuple should be updated to reflect
+          *   that it is no longer stored on any page.
+          * @throws DbException if this tuple is not on this page, or tuple slot is
+          *         already empty.
+          * @param t The tuple to delete
+          */
+        void deleteTuple(Tuple *t);
+
+        /**
+         * Adds the specified tuple to the page;  the tuple should be updated to reflect
+         *  that it is now stored on this page.
+         * @throws DbException if the page is full (no empty slots) or tupledesc
+         *         is mismatch.
+         * @param t The tuple to add.
+         */
+        void insertTuple(Tuple *t);
+
     };
 
     /**

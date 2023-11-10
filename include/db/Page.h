@@ -31,7 +31,7 @@ namespace db {
          *
          * @return The id of the transaction that last dirtied this page, or nullopt
          */
-        virtual std::optional<TransactionId> isDirty() const final {
+        std::optional<TransactionId> isDirty() const {
             return dirty;
         }
 

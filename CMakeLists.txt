@@ -9,7 +9,9 @@ enable_testing()
 
 add_subdirectory(db)
 #add_subdirectory(tests/pa1)
-add_subdirectory(tests/pa2)
+#add_subdirectory(tests/pa2)
+add_subdirectory(tests/pa3)
+#add_subdirectory(tests/pa4)
 add_subdirectory(examples)
 
 configure_file(heapfile.dat ${CMAKE_CURRENT_BINARY_DIR}/tests/pa1/heapfile.dat COPYONLY)

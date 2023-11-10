@@ -31,22 +31,22 @@ Field *IntField::parse(void *data) {
     return new IntField(value);
 }
 
-bool IntField::compare(Op op, const Field *val) const {
+bool IntField::compare(Predicate::Op op, const Field *val) const {
     const IntField *iVal = dynamic_cast<const IntField *>(val);
     switch (op) {
-        case Op::EQUALS:
+        case Predicate::Op::EQUALS:
             return value == iVal->value;
-        case Op::NOT_EQUALS:
+        case Predicate::Op::NOT_EQUALS:
             return value != iVal->value;
-        case Op::GREATER_THAN:
+        case Predicate::Op::GREATER_THAN:
             return value > iVal->value;
-        case Op::GREATER_THAN_OR_EQ:
+        case Predicate::Op::GREATER_THAN_OR_EQ:
             return value >= iVal->value;
-        case Op::LESS_THAN:
+        case Predicate::Op::LESS_THAN:
             return value < iVal->value;
-        case Op::LESS_THAN_OR_EQ:
+        case Predicate::Op::LESS_THAN_OR_EQ:
             return value <= iVal->value;
-        case Op::LIKE:
+        case Predicate::Op::LIKE:
             return value == iVal->value;
     }
     return false;

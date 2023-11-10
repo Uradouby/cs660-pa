@@ -3,14 +3,9 @@
 
 #include <ostream>
 #include <db/Type.h>
+#include <db/Predicate.h>
 
 namespace db {
-    enum class Op {
-        EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQ, GREATER_THAN_OR_EQ, LIKE
-    };
-
-    std::string to_string(Op op);
-
     /**
      * Interface for values of fields in tuples.
      */
@@ -34,7 +29,7 @@ namespace db {
          * @param value The value to compare this Field to
          * @return Whether or not the comparison yields true.
          */
-        virtual bool compare(Op op, const Field *value) const = 0;
+        virtual bool compare(Predicate::Op op, const Field *value) const = 0;
     };
 }
 

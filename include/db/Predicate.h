@@ -2,22 +2,25 @@
 #define DB_PREDICATE_H
 
 #include <string>
-#include <db/Tuple.h>
-#include <db/Field.h>
 #include <cassert>
 
 namespace db {
+    class Tuple;
+    class Field;
     /**
      * Predicate compares tuples to a specified Field value.
      */
     class Predicate {
-        int field;
-        Op op;
-        const Field *operrand;
-
-        /** Constants used for return codes in Field.compare */
     public:
+        enum class Op {
+            EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQ, GREATER_THAN_OR_EQ, LIKE
+        };
+    private:
+        int field;
+        Predicate::Op op;
+        const Field *operand;
 
+    public:
         /**
          * Constructor.
          *
@@ -61,10 +64,9 @@ namespace db {
          * Returns something useful, like "f = field_id op = op_string operand =
          * operand_string
          */
-        std::string toString() const {
-            return "f = " + std::to_string(getField()) + " op = " + to_string(getOp()) +
-                   " operand = " + getOperand()->to_string();
-        }
+        std::string to_string() const;
     };
+
+    std::string to_string(Predicate::Op op);
 }
 #endif

@@ -139,7 +139,7 @@ void BTreeLeafPage::insertTuple(Tuple *t) {
     const Field &key = t->getField(keyField);
     for (int i = 0; i < numSlots; i++) {
         if (isSlotUsed(i)) {
-            if (!tuples[i].getField(keyField).compare(Op::LESS_THAN_OR_EQ, &key))
+            if (!tuples[i].getField(keyField).compare(Predicate::Op::LESS_THAN_OR_EQ, &key))
                 break;
             lessOrEqKey = i;
         }

@@ -197,7 +197,7 @@ namespace db {
         bool isSlotUsed(int i) const override;
 
         /**
-         * @return an iterator over all entries on this page (calling remove on this iterator throws an UnsupportedOperationException)
+         * @return an iterator over all entries on this page
          * (note that this iterator shouldn't return entries in empty slots!)
          */
         BTreeInternalPageIterator begin();

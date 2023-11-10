@@ -19,8 +19,10 @@ TEST(SeqScanTest, IterateFile) {
 
     db::SeqScan f(table.getId());
 
-    EXPECT_NE(f.begin(), f.end());
-    for (const auto& tup: f) {
+    f.open();
+    while (f.hasNext()) {
+        auto tup = f.next();
         std::cout << tup.to_string() << std::endl;
     }
+    f.close();
 }

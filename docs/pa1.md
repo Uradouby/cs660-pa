@@ -131,7 +131,7 @@ Add any private members needed and implement the methods in:
 ### Exercise 4
 
 - HeapPageId ([header](../include/db/HeapPageId.h) & [implementation](../db/HeapPageId.cpp))
-- RecordID ([header](../include/db/RecordID.h) & [implementation](../db/RecordID.cpp))
+- RecordID ([header](../include/db/RecordId.h) & [implementation](../db/RecordId.cpp))
 - HeapPage ([header](../include/db/HeapPage.h) & [implementation](../db/HeapPage.cpp))
 
 ### Exercise 5

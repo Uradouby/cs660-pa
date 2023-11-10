@@ -31,7 +31,7 @@ namespace db {
             return value;
         }
 
-        bool compare(Op op, const Field *value) const override;
+        bool compare(Predicate::Op op, const Field *value) const override;
     };
 }
 

@@ -12,11 +12,11 @@ BTreeInternalPageIterator::BTreeInternalPageIterator(int slot, BTreeInternalPage
     if (slot == p->numSlots) {
         return;
     }
-    
+
     if(slot > 0)
         prevChildId = p->getChildId(curEntry - 1);
-
     currChildId = p->getChildId(curEntry);
+
 
     if(currChildId == nullptr) {
         curEntry = p->numSlots;
@@ -249,14 +249,14 @@ void BTreeInternalPage::updateEntry(BTreeEntry *e) {
     for (int i = rid->getTupleno() + 1; i < numSlots; i++) {
         if (isSlotUsed(i)) {
             // attempt to update entry with invalid key e.getKey(). HINT: updated key must be less than or equal to keys on the right
-            assert(keys[i]->compare(Op::GREATER_THAN_OR_EQ, e->getKey()));
+            assert(keys[i]->compare(Predicate::Op::GREATER_THAN_OR_EQ, e->getKey()));
             break;
         }
     }
     for (int i = rid->getTupleno() - 1; i >= 0; i--) {
         if (isSlotUsed(i)) {
             // attempt to update entry with invalid key e.getKey(). HINT: updated key must be greater than or equal to keys on the left
-            assert(i == 0 || keys[i]->compare(Op::LESS_THAN_OR_EQ, e->getKey()));
+            assert(i == 0 || keys[i]->compare(Predicate::Op::LESS_THAN_OR_EQ, e->getKey()));
             children[i] = e->getLeftChild()->pageNumber();
             break;
         }
@@ -313,14 +313,14 @@ void BTreeInternalPage::insertEntry(BTreeEntry e) {
                 // attempt to insert invalid entry with
                 // HINT: one of these children must match an existing child on the page and
                 // this key must be correctly ordered in between that child's left and right keys
-                assert(i == 0 || keys[i]->compare(Op::LESS_THAN_OR_EQ, e.getKey()));
+                assert(i == 0 || keys[i]->compare(Predicate::Op::LESS_THAN_OR_EQ, e.getKey()));
                 lessOrEqKey = i;
                 if (children[i] == e.getRightChild()->pageNumber()) {
                     children[i] = e.getLeftChild()->pageNumber();
                 }
             } else if (lessOrEqKey != -1) {
                 // validate that the next key is greater than or equal to the one we are inserting
-                assert(keys[i]->compare(Op::GREATER_THAN_OR_EQ, e.getKey()));
+                assert(keys[i]->compare(Predicate::Op::GREATER_THAN_OR_EQ, e.getKey()));
                 // attempt to insert invalid entry with left child
                 // HINT: one of these children must match an existing child on the page
                 // and this key must be correctly ordered in between that child's

@@ -8,6 +8,7 @@
 #include <db/TupleDesc.h>
 #include <db/DbFile.h>
 #include <db/HeapFile.h>
+#include <db/DbIterator.h>
 
 namespace db {
     /**
@@ -15,11 +16,12 @@ namespace db {
      * each tuple of a table in no particular order (e.g., as they are laid out on
      * disk).
      */
-    class SeqScan {
+    class SeqScan : public DbIterator {
         using iterator = HeapFileIterator;
         int tableid;
         std::string alias;
         std::string tableName;
+        std::optional<SeqScan::iterator> itopt;
     public:
 
         /**
@@ -75,11 +77,17 @@ namespace db {
          * @return the TupleDesc with field names from the underlying HeapFile,
          *         prefixed with the tableAlias string from the constructor.
          */
-        const TupleDesc &getTupleDesc() const;
+        const TupleDesc &getTupleDesc() const override;
 
-        iterator begin() const;
+        void open() override;
 
-        iterator end() const;
+        bool hasNext() override;
+
+        Tuple next() override;
+
+        void rewind() override;
+
+        void close() override;
     };
 }
 #endif
