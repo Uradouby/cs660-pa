@@ -42,7 +42,7 @@ int main() {
     int field2 = 1;
     JoinPredicate p(field1, Predicate::Op::EQUALS, field2);
 
-    Join j(p, &sf1, &ss2);
+    Join j(&p, &sf1, &ss2);
 
     // and run it
     j.open();

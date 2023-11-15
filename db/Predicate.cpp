@@ -22,6 +22,6 @@ bool Predicate::filter(const Tuple &t) const {
 }
 
 std::string Predicate::to_string() const {
-    return "f = " + std::to_string(getField()) + " op = " + to_string(getOp()) +
+    return "f = " + std::to_string(getField()) + " op = " + ::to_string(getOp()) +
            " operand = " + getOperand()->to_string();
 }
