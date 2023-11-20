@@ -21,6 +21,7 @@ std::vector<Page *> HeapFile::insertTuple(TransactionId tid, Tuple &t) {
     }
     if (page == nullptr) {
         page = new HeapPage(HeapPageId(tableid, numPages), static_cast<uint8_t *>(HeapPage::createEmptyPageData()));
+        numPages++;
     }
     page->insertTuple(&t);
     return {page};

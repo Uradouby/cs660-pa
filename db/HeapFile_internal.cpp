@@ -50,7 +50,7 @@ int HeapFile::getNumPages() const {
 }
 
 HeapFileIterator HeapFile::begin() const {
-    return {getId(), getNumPages()};
+    return *new HeapFileIterator(getId(), getNumPages());
 }
 
 HeapFileIterator HeapFile::end() const {

@@ -15,3 +15,4 @@ add_subdirectory(tests/pa3)
 add_subdirectory(examples)
 
 configure_file(heapfile.dat ${CMAKE_CURRENT_BINARY_DIR}/tests/pa1/heapfile.dat COPYONLY)
+configure_file(table.dat ${CMAKE_CURRENT_BINARY_DIR}/tests/pa3/table.dat COPYONLY)

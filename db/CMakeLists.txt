@@ -21,11 +21,14 @@ add_library(db
         HeapPage.cpp
         HeapPage_internal.cpp
         HeapPageId.cpp
+        Histogram.cpp
         IndexPredicate.cpp
         Insert.cpp
         IntField.cpp
+        IntHistogram.cpp
         IntegerAggregator.cpp
         Join.cpp
+        JoinOptimizer.cpp
         JoinPredicate.cpp
         Operator.cpp
         Predicate.cpp
@@ -34,11 +37,14 @@ add_library(db
         SkeletonFile.cpp
         StringAggregator.cpp
         StringField.cpp
+        TableStats.cpp
         TransactionId.cpp
         Tuple.cpp
         TupleDesc.cpp
         Type.cpp
         Utility.cpp
+        PlanCache.cpp
+        LogicalJoinNode.cpp
 )
 
 target_include_directories(db PUBLIC ../include)
