@@ -404,7 +404,7 @@ namespace db {
         /**
          * Returns the number of pages in this BTreeFile.
          */
-        int getNumPages() const;
+        int getNumPages() const override;
 
         /**
          * Returns the index of the field that this B+ tree is keyed on

@@ -56,3 +56,7 @@ std::vector<Page *> SkeletonFile::deleteTuple(TransactionId tid, Tuple &t) {
 void SkeletonFile::writePage(Page *p) {
     writes++;
 }
+
+int SkeletonFile::getNumPages() const {
+    return 0;
+}

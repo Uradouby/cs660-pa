@@ -61,6 +61,8 @@ namespace db {
             return td;
         }
 
+        int getNumPages() const override;
+
         Page *readPage(const PageId &pid) override;
 
         void writePage(Page *p) override;

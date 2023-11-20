@@ -77,7 +77,7 @@ namespace db {
         /**
          * Returns the number of pages in this HeapFile.
          */
-        int getNumPages() const;
+        int getNumPages() const override;
 
         HeapFileIterator begin() const;
 

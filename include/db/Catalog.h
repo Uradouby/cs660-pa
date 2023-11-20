@@ -23,7 +23,7 @@ namespace db {
      * to a catalog that reads a catalog table from disk.
      */
     class Catalog {
-        using iterator = std::unordered_map<int, Table>::iterator;
+        using iterator = std::unordered_map<int, Table *>::iterator;
         std::unordered_map<int, Table*> idToTable;
         std::unordered_map<std::string, Table*> nameToTable;
     public:
@@ -84,6 +84,14 @@ namespace db {
 
         /** Delete all tables from the catalog */
         void clear();
+
+        iterator begin() {
+            return idToTable.begin();
+        }
+
+        iterator end() {
+            return idToTable.end();
+        }
     };
 }
 
